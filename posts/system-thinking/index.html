@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Hugo Blog </title>
+    <title>Hugo Blog  | System Thinking</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -28,24 +28,33 @@
 
     
 
-    <meta property="og:title" content="404 Page not found" />
-<meta property="og:description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="" />
+    <meta property="og:title" content="System Thinking" />
+<meta property="og:description" content="System Design Primer" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://1612628.github.io/posts/system-thinking/" />
 
 
-<meta itemprop="name" content="404 Page not found">
-<meta itemprop="description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.">
+<meta itemprop="name" content="System Thinking">
+<meta itemprop="description" content="System Design Primer">
 
+
+
+<meta itemprop="wordCount" content="511">
+
+
+
+<meta itemprop="keywords" content="tecnical-skill,zalopay-edu," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
-<meta name="twitter:description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."/>
+<meta name="twitter:title" content="System Thinking"/>
+<meta name="twitter:description" content="System Design Primer"/>
 
   </head>
 
   <body class="ma0 avenir bg-near-white">
 
     
+   
+  
 
   <header>
     <div class="bg-black">
@@ -134,13 +143,90 @@
   </header>
 
 
+
     <main class="pb7" role="main">
       
-    <article class="center cf pv5 measure-wide-l">
-      <h1>
-        This is not the page you were looking for
-      </h1>
-    </article>
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        ARTICLES
+      </p>
+      <h1 class="f1 athelas mb1">System Thinking</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="0001-01-01T00:00:00Z">January 1, 0001</time>      
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<p>#System Design Primer
+###1. Định lý CAP
+<img src="**C**onsistency - **A**vailability - **P**artition Tolerance" alt="cap-theorem" />
+Được đề xuất bởi tiến sĩ Eric Brewer. Trong một hệ thống phân tán ta chỉ có thể giữ được 2 trong 3 giá trị (tinh chất) nói trên và phải hy sinh 1 tính chất. Ta sẽ nói rõ các tính chất sau đây:
+- <strong>C</strong>onsistency (tính nhất quán /đồng nhất): Mỗi lần đọc dữ liệu sẽ nhận được dữ liệu mới nhất hoặc làeorem
+- <strong>A</strong>vailability (tính sẵn sàng): Một node không bị lỗi sẽ trả về một response thích hợp (không đảm bảo thông tin là mới nhất) trong một khoảng thời gian thích hợp.
+- <strong>P</strong>artition Tolerance (phân vùng): Hệ thống có tiếp tục hoạt động, bất chấp một lượng tùy ý các thông điệp (gói tin) bị mất hoặc trì hoãn do trục trặc hoặc đứt kết nối mạng.<br />
+<img src="https://1612628.github.io/assets/images_system_thinking/partition.png" alt="partition" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Đường truyền kết nối mạng thường hay bị đứt và không đoán trước được vì thế lỗi mạng có thể xảy với hệ thống của bạn bất kì lức nào mà bạn không thể lường trước được. Nên khi bạn muốn cung cấp hệ thống phân tán (Partition Tolerance) thì bạn phải đánh đổi hoặc là chọn Consistency hoặc là chọn Availability.</p>
+
+<ul>
+<li><strong>CP</strong> - <strong>C</strong>onsistency/<strong>P</strong>artition Tolerance - khi đường dẫn bị đứt việc đợi một response từ node phân tán mà có thể dẫn đến lỗi time out. Hệ thống sẽ có thể chọn trả về lỗi tùy theo mong muốn người xây dựng hệ thống. <strong>CP</strong> tốt trong trường hợp khi yêu cầu hệ thống của bạn phải là atomic reads and writes (tất cả hình thức đọc và ghi phải là luôn đúng với mọi quy trình).
+<img src="https://1612628.github.io/assets/images_system_thinking/consistency.png" alt="consistency" /></li>
+<li><strong>AP</strong> - <strong>A</strong>vailability/<strong>P</strong>artition Tolerance - các responses sẽ trả về những phiên bản dữ liệu gần nhất hiện tại đang có trên node, có thể không phải là phiên bản mới nhất. Trạng thái hệ thống cũng có thể chấp nhận các lệnh Writes(ghi) mà sau đó có thể được xử lý khi tình trạng đứt mạng của các node được phục hồi. <strong>AP</strong> tốt khi hệ thống kinh doanh của bạn cần sự linh động về dữ liệu khi đồng bộ, đáp ứng nhu cầu liên tục của khách hàng. <strong>AP</strong> là một lựa chọn tốt cho hệ thống cần sự không bị gián đoạn chức cho dù xảy ra một số lỗi bên ngoài.
+<img src="https://1612628.github.io/assets/images_system_thinking/availability.png" alt="availability" /><br /></li>
+</ul>
+
+<p>Việc chọn lựa giữa <strong>C</strong>onsistency hay <strong>A</strong>vailability là tùy vào nghiệp vụ và yêu cầu của mô hình kinh doanh. Khi đối mặt với sự ngắt kết nối giữa các node, bạn phải có sự lựa chọn đánh đổi phù hợp với mô hình kinh doanh xây dựng. Dù muốn hay không, việc đứt kết nối mạng là một điều thực tế và không thể tránh khỏi. Bạn cần hiểu và chấp nhận sự <em>không hoàn hảo</em> này của mọi hệ thống.<br />
+Trong bài này, mình sẽ tập trung vào giải pháp <strong>AP</strong> vì nó thực tế và đáp ứng được nhiều yêu cầu và mô hình kinh doanh hiện nay.</p>
+
+<h3 id="2-giải-pháp-ap">2. Giải pháp AP</h3>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="https://1612628.github.io/tags/tecnical-skill" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">tecnical-skill</a>
+   </li>
+  
+   <li class="list">
+     <a href="https://1612628.github.io/tags/zalopay-edu" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">zalopay-edu</a>
+   </li>
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
